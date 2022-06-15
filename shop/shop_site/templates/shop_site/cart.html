@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load tags %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block sidebar %}
+{% include 'include_html/_navigation.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+
+{% for item in cart_item %}
+<div class="card mb-4" align="center">
+    <h1>{{ item.prod_id }}</h1>
+    <h1>Количество: {{ item.quantity }}</h1>
+    <h1>Общая сумма: {% multiply item.prod_id.price item.quantity %}$</h1>
+    <div align="center">
+        <img src="{{ item.prod_id.cover.url }}" alt="" width="350" class="mr-3"><p></p>
+    </div>
+    <div>
+        <a class="btn btn-success" href="{% url 'plus-product' item.prod_id %}" role="button">Добавить</a><p></p>
+        <a class="btn btn-secondary" href="{% url 'minus-product' item.prod_id %}" role="button">Убавить</a><p></p>
+        <a class="btn btn-danger" href="{% url 'delete-product' item.prod_id %}" role="button">Удалить</a><p></p>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

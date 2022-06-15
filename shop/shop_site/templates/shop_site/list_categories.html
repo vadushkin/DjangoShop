@@ -1,0 +1,10 @@
+<div class="list-group">
+    <h3>Фильтры: </h3>
+    <a href="{% url 'name' %}" class="list-group-item list-group-item-action">Название</a>
+    <a href="{% url 'price' %}" class="list-group-item list-group-item-action">Цена</a>
+    <p></p>
+    <h3>Категории: </h3>
+    {% for category in categories %}
+    <a href="{% url 'category' category.name %}" class="list-group-item list-group-item-action">{{ category.name }}</a>
+    {% endfor %}
+</div>

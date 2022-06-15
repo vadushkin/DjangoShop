@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block sidebar %}
+{% include 'include_html/_navigation.html' %}
+{% endblock %}
+
+
+{% block filters %}
+{% include 'include_html/_sidebar_filters.html' %}
+{% endblock %}
+
+{% block content %}
+
+{% for product in products %}
+
+<div class="card mb-3">
+
+    <div class="card-header">
+        Категория: {{ product.category }}
+    </div>
+
+    <div class="card-body">
+        <img src="{{ product.cover.url }}" alt="" width="300" class="mr-3">
+        <h2>{{ product.name }}</h2>
+        <h4>{{ product.description }}</h4>
+        <h5>Цена: {{ product.price }}$</h5>
+        {% if request.user.is_authenticated %}
+            <a class="btn btn-primary" href="{% url 'add-product' product.name %}" role="button">Добавить в корзину</a>
+        {% endif %}
+    </div>
+
+    <div class="card-footer text-muted">
+        Время создания: {{ product.created_at }}
+    </div>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
